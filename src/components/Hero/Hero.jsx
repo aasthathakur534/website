@@ -1,19 +1,28 @@
-import { useState } from "react"
-import "./Hero.css"
+import "./Hero.css";
 
-const Hero = () => {
-    let heroData = [
-        {text1:"Dive into",text2:"what you love"},
-        {text1:"Indulge",text2:"your passions"},
-        {text1:"Give in to",text2:"your passions"}
-    ]
-    const [heroCount,setHeroCount] = useState(2);
-    const [playStatus,setPlayStatus] = useState(false);
+const Hero = ({ heroCount, setPlayStatus, handleNext, handlePrev }) => {
+  const heroText = [
+    { text: "Explore the world", buttonText: "Start Video" },
+    { text: "Adventure awaits", buttonText: "Start Video" },
+    { text: "Discover new places", buttonText: "Start Video" },
+  ];
+
   return (
-    <div>
-      <Background playStatus={playStatus} heroCount = {heroCount}/>
-    </div>
-  )
-}
+    <div className="hero">
+      <h1>{heroText[heroCount].text}</h1>
+      <div className="hero-buttons">
+        <button onClick={() => setPlayStatus(true)}>
+          {heroText[heroCount].buttonText}
+        </button>
+      </div>
 
-export default Hero
+      {/* ✅ arrows fixed */}
+      <div className="arrows">
+        <button onClick={handlePrev}>⬅️</button>
+        <button onClick={handleNext}>➡️</button>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;

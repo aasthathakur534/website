@@ -1,18 +1,32 @@
-import { useState } from "react"
-import Background from "./components/Background/Background";
-const App = () => {
-  let heroData = [
-    {text1:"Drive into",text2: "what you love"},
-    {text1:"Indulge",text2: "your passions"},
-    {text1: "Give in to",text2:"your passions"},
-  ]
-  const [heroCount,setHeroCount] = useState(2);
-  const [playStatus,setPlayStatus] = useState(false);
+import { useState } from "react";
+import Hero from "./Components/Hero/Hero";
+import Background from "./Components/Background/Background";
+
+function App() {
+  const [heroCount, setHeroCount] = useState(0);
+  const [playStatus, setPlayStatus] = useState(false);
+
+  // ✅ cycle next
+  const handleNext = () => {
+    setHeroCount((prev) => (prev + 1) % 3); // 0→1→2→0
+  };
+
+  // ✅ cycle prev
+  const handlePrev = () => {
+    setHeroCount((prev) => (prev - 1 + 3) % 3); // 0→2→1→0
+  };
+
   return (
     <div>
-      <Background playStatus={playStatus} heroCount={heroCount}/>
+      <Background playStatus={playStatus} heroCount={heroCount} />
+      <Hero
+        heroCount={heroCount}
+        setPlayStatus={setPlayStatus}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
